@@ -447,5 +447,26 @@ https://tinyurl.com/47j9as62<span style="color: #fcff01;">&nbsp; &nbsp; &nbsp; &
         });
     }
 </script>
+	 <!-- JavaScript logic handling clipboard actions across all elements -->
+    <script>
+        function copyText(container) {
+            // Isolates and reads the raw link stored inside the specific item clicked
+            const addressText = container.querySelector('.web-address').getAttribute('data-link');
+            const tooltip = container.querySelector('.tooltip');
+
+            // Modern asynchronous clipboard action
+            navigator.clipboard.writeText(addressText).then(() => {
+                // Temporarily flips label string to provide live click confirmation
+                tooltip.innerHTML = "Copied!";
+                
+                // Returns tooltip wording to baseline state after a brief delay
+                setTimeout(() => {
+                    tooltip.innerHTML = "Click to copy address";
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy link text automatically: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
